@@ -1,0 +1,142 @@
+﻿html,
+body {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  color: white;
+}
+.row {
+  margin: unset;
+}
+.dropdown-menu {
+  background-color: #021d30;
+}
+.displaybox {
+  text-align: center;
+  padding: 10px;
+}
+.calcval {
+  font-size: 150%;
+}
+.map {
+  height: 100%;
+  width: 100%;
+}
+
+#main {
+  width: 66%;
+  height: 100%;
+}
+
+.sidenav {
+  width: 33%;
+}
+
+.ol-zoom {
+  top: 0.5em;
+  right: 0.5em;
+  left: unset;
+}
+
+#graph {
+  height: 33%;
+  width: 100%;
+}
+
+#graphcontainer_1 {
+  position: relative;
+  height: 100%;
+  width: calc(100vw - 2px);
+  border: 1px solid red;
+}
+
+.dd-list {
+  background-color: rgba(0, 60, 136, 0.5);
+  list-style-type: none;
+  margin-block-start: 0;
+  color: white;
+  position: absolute;
+  z-index: 1;
+  right: 10px;
+}
+
+.dropdown-toggle {
+  position: relative;
+  top: 10px;
+  left: -10px;
+  color: white;
+}
+
+.layer-switcher,
+.layer-switcher button {
+  background-color: unset;
+  top: 0.5em;
+}
+
+.layer-switcher ul {
+  padding-left: 0;
+  margin-left: 1em;
+}
+
+input[type="range"].slider {
+  display: inline-block;
+  margin-top: 8px;
+}
+
+.slider {
+  -webkit-appearance: none;
+  width: 100% !important; /*calc(100% - 50px) !important;*/
+  display: inline-block;
+  height: 15px;
+  border-radius: 5px;
+  background: #d3d3d3;
+  outline: none;
+  opacity: 0.7;
+  -webkit-transition: 0.2s;
+  transition: opacity 0.2s;
+}
+
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  background: #00acec;
+  cursor: pointer;
+}
+
+.slider::-moz-range-thumb {
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  background: #00acec;
+  cursor: pointer;
+}
+.dashboardheader {
+  font-size: 30px;
+  text-align: center;
+}
+
+@media only screen and (max-width: 1366px) {
+  .dashboardheader {
+    font-size: 30px;
+    font-size: 2vw;
+    text-align: center;
+  }
+}
+
+@media only screen and (max-width: 900px) {
+  .dashboardheader {
+    font-size: 30px;
+    font-size: 2.5vw;
+    text-align: center;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .dashboardheader {
+    font-size: 30px;
+    text-align: center;
+  }
+}

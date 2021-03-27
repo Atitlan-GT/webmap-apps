@@ -1,0 +1,242 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <!-- Latest compiled and minified CSS -->
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
+      integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu"
+      crossorigin="anonymous"
+    />
+    <!-- Optional theme -->
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap-theme.min.css"
+      integrity="sha384-6pzBo3FDv/PJ8r2KRkGHifhEocL+1X2rVCTTkUfGk7/0pbek5mMa1upzvWbrUbOZ"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.3.1/css/ol.css"
+      type="text/css"
+    />
+    <link href="css/ol-layerswitcher.css" rel="stylesheet" />
+    <link href="css/degradation.css" rel="stylesheet" />
+    <!-- Latest compiled and minified JavaScript -->
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"
+      integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.3.1/build/ol.js"></script>
+    <script src="js/ol-layerswitcher.js"></script>
+    <script src="js/degradation.js"></script>
+    <script src="js/lakeatitlan.js"></script>
+    <script src="js/available_data.js"></script>
+    <title>Lake Atitlan</title>
+    <link rel="icon" href="favicon.ico" />
+  </head>
+  <body>
+    <div class="row" style="height: 100%; margin: unset">
+      <div class="col-sm-9" style="height: 100%; padding: 0">
+        <div id="map" class="map">
+          <ul
+            style="
+              position: absolute;
+              left: 0.5em;
+              top: 0.5em;
+              z-index: 1;
+              background-color: rgba(0, 60, 136, 0.5);
+              list-style-type: none;
+              padding-bottom: 15px;
+              border-radius: 4px;
+              font-weight: 600;
+              border: #ffffffc4 solid 3px;
+            "
+          >
+            <li class="dropdown" style="right: 0.5em">
+              <a href="#" data-toggle="dropdown" class="dropdown-toggle"
+                >Layers<b class="caret"></b
+              ></a>
+              <ul class="dropdown-menu" style="padding: 0.5em">
+                <li>
+                  <div class="checkbox">
+                    <label>
+                      <input
+                        type="checkbox"
+                        checked
+                        onchange="toggleLayer('Landsat', this.checked)"
+                      />Landsat 8
+                    </label>
+                  </div>
+                  <div>
+                    <input
+                      type="range"
+                      name="Landsatopacity"
+                      id="Landsatopacity"
+                      value="100"
+                      min="0"
+                      max="100"
+                      step="1"
+                      style="display: block"
+                      class="slider"
+                    />
+                  </div>
+                </li>
+                <li>
+                  <div class="checkbox">
+                    <label>
+                      <input
+                        type="checkbox"
+                        checked
+                        onchange="toggleLayer('Sentinelt', this.checked)"
+                      />Sentinel 2 True
+                    </label>
+                  </div>
+                  <div>
+                    <input
+                      type="range"
+                      name="Sentineltopacity"
+                      id="Sentineltopacity"
+                      value="100"
+                      min="0"
+                      max="100"
+                      step="1"
+                      style="display: block"
+                      class="slider"
+                    />
+                  </div>
+                </li>
+                <li>
+                  <div class="checkbox">
+                    <label>
+                      <input
+                        type="checkbox"
+                        checked
+                        onchange="toggleLayer('Sentinelf', this.checked)"
+                      />Sentinel 2 False
+                    </label>
+                  </div>
+                  <div>
+                    <input
+                      type="range"
+                      name="Sentinelfopacity"
+                      id="Sentinelfopacity"
+                      value="100"
+                      min="0"
+                      max="100"
+                      step="1"
+                      style="display: block"
+                      class="slider"
+                    />
+                  </div>
+                </li>
+                <li>
+                  <div class="checkbox">
+                    <label>
+                      <input
+                        type="checkbox"
+                        checked
+                        onchange="toggleLayer('Planet', this.checked)"
+                      />Planet
+                    </label>
+                    <div>
+                      <input
+                        type="range"
+                        name="Planetopacity"
+                        id="Planetopacity"
+                        value="100"
+                        min="0"
+                        max="100"
+                        step="1"
+                        style="display: block"
+                        class="slider"
+                      />
+                    </div>
+                  </div>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div
+        class="col-sm-3"
+        style="height: 100%; padding: 0; background-color: #021d30"
+      >
+        <h2 class="dashboardheader">Lake Atitlan Dashboard</h2>
+        <div class="row">
+          <div class="col-sm-12">
+            <p style="text-align: center">Model calculated day at a glance</p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-12">
+            <p style="text-align: center">
+              <span id="percent"></span> <span> likelihood of a bloom</span>
+            </p>
+            <p style="text-align: center" id="yesnobloom"></p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-12">
+            <p class="dashboardheader">Surface Temperature</p>
+            <div class="row">
+              <div
+                class="col-sm-12 displaybox"
+                style="background-color: #395a79"
+              >
+                <p id="surfacetemp" class="calcval"></p>
+                <span id="stdate"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-12">
+            <p class="dashboardheader">Lake Temperature</p>
+            <div class="row">
+              <div
+                class="col-sm-12 displaybox"
+                style="background-color: #395a79"
+              >
+                <p id="laketemp" class="calcval"></p>
+                <span id="ltdate"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-12">
+            <p class="dashboardheader">Daily accumulated precipitation</p>
+            <div class="row">
+              <div
+                class="col-sm-12 displaybox"
+                style="background-color: #395a79"
+              >
+                <p id="dailyacc" class="calcval"></p>
+                <span id="dadate"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-12">
+            <p class="dashboardheader">Recent Data</p>
+            <div class="row">
+              <div
+                class="col-sm-12 displaybox"
+                style="background-color: #395a79"
+              >
+                <span>Planet: </span> <span id="planetdate"></span><br />
+                <span>Sentinel: </span> <span id="sentineldate"></span><br />
+                <span>Landsat: </span> <span id="landsatdate"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

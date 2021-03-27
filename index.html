@@ -1,0 +1,224 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script type="text/javascript" src="js/highcharts.js"></script>
+    <!-- Latest compiled and minified CSS -->
+    <link
+      rel="stylesheet"
+      href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
+      integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu"
+      crossorigin="anonymous"
+    />
+    <!-- Optional theme -->
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap-theme.min.css"
+      integrity="sha384-6pzBo3FDv/PJ8r2KRkGHifhEocL+1X2rVCTTkUfGk7/0pbek5mMa1upzvWbrUbOZ"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.3.1/css/ol.css"
+      type="text/css"
+    />
+    <link href="css/ol-layerswitcher.css" rel="stylesheet" />
+    <link href="css/index.css" rel="stylesheet" />
+    <!-- Latest compiled and minified JavaScript -->
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"
+      integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.3.1/build/ol.js"></script>
+    <script src="js/ol-layerswitcher.js"></script>
+    <script src="js/lakeatitlan.js"></script>
+    <script src="js/hab_graphing.js"></script>
+    <script src="js/available_data.js"></script>
+    <title>Lake Atitlan</title>
+    <link rel="icon" href="favicon.ico" />
+  </head>
+  <body>
+    <div
+      id="sideNavHandle"
+      style="position: absolute; top: calc(50vh - 25px); left: 0; z-index: 5"
+    >
+      <img
+        src="img/calendar-icon.png"
+        width="25"
+        height="25"
+        onclick="toggleNav()"
+        alt="Open date control panel"
+        title="Open date control panel"
+      />
+    </div>
+    <div id="mySidenav" class="sidenav">
+      <h5 class="callabel">Available Landsat</h5>
+      <span id="landsatdatepick"></span>
+      <h5 class="callabel">Available Sentinel</h5>
+      <span id="sentineldatepick"></span>
+      <h5 class="callabel">Available Planet</h5>
+      <span id="planetdatepick"></span>
+    </div>
+    <div id="main">
+      <div id="map" class="map">
+        <ul
+          id="layermgr"
+          style="
+            position: absolute;
+            left: 0.5em;
+            top: 0.5em;
+            z-index: 1;
+            background-color: rgba(0, 60, 136, 0.5);
+            list-style-type: none;
+            padding-bottom: 15px;
+            border-radius: 4px;
+            font-weight: 600;
+            border: #ffffffc4 solid 3px;
+          "
+        >
+          <li class="dropdown" style="right: 0.5em">
+            <a href="#" data-toggle="dropdown" class="dropdown-toggle"
+              >Layers<b class="caret"></b
+            ></a>
+            <ul class="dropdown-menu" style="padding: 0.5em">
+              <li>
+                <div class="checkbox">
+                  <label>
+                    <input
+                      type="checkbox"
+                      checked
+                      onchange="toggleLayer('Landsat', this.checked)"
+                    />Landsat 8
+                  </label>
+                </div>
+                <div>
+                  <input
+                    type="range"
+                    name="Landsatopacity"
+                    id="Landsatopacity"
+                    value="100"
+                    min="0"
+                    max="100"
+                    step="1"
+                    style="display: block"
+                    class="slider"
+                  />
+                </div>
+              </li>
+              <li>
+                <div class="checkbox">
+                  <label>
+                    <input
+                      type="checkbox"
+                      checked
+                      onchange="toggleLayer('Sentinelt', this.checked)"
+                    />Sentinel 2 True
+                  </label>
+                </div>
+                <div>
+                  <input
+                    type="range"
+                    name="Sentineltopacity"
+                    id="Sentineltopacity"
+                    value="100"
+                    min="0"
+                    max="100"
+                    step="1"
+                    style="display: block"
+                    class="slider"
+                  />
+                </div>
+              </li>
+              <li>
+                <div class="checkbox">
+                  <label>
+                    <input
+                      type="checkbox"
+                      checked
+                      onchange="toggleLayer('Sentinelf', this.checked)"
+                    />Sentinel 2 False
+                  </label>
+                </div>
+                <div>
+                  <input
+                    type="range"
+                    name="Sentinelfopacity"
+                    id="Sentinelfopacity"
+                    value="100"
+                    min="0"
+                    max="100"
+                    step="1"
+                    style="display: block"
+                    class="slider"
+                  />
+                </div>
+              </li>
+              <li>
+                <div class="checkbox">
+                  <label>
+                    <input
+                      type="checkbox"
+                      checked
+                      onchange="toggleLayer('Planet', this.checked)"
+                    />Planet
+                  </label>
+                  <div>
+                    <input
+                      type="range"
+                      name="Planetopacity"
+                      id="Planetopacity"
+                      value="100"
+                      min="0"
+                      max="100"
+                      step="1"
+                      style="display: block"
+                      class="slider"
+                    />
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+      <div id="graph" style="position: relative">
+        <div
+          id="graphMenu"
+          style="position: absolute; top: 0; left: 2px; z-index: 1"
+        >
+          <ul id="graphlist">
+            <li>
+              <a onclick="toggleGraph('chartcontainer')" style="cursor: pointer"
+                >Probability</a
+              >
+            </li>
+            <li>
+              <a onclick="toggleGraph('laketempchart')" style="cursor: pointer"
+                >Lake Mean Temp</a
+              >
+            </li>
+            <li>
+              <a onclick="toggleGraph('landtempchart')" style="cursor: pointer"
+                >Land Mean Temp</a
+              >
+            </li>
+          </ul>
+        </div>
+        <div id="chartcontainer"></div>
+        <div id="landtempchart"></div>
+        <div id="laketempchart"></div>
+      </div>
+    </div>
+  </body>
+</html>
