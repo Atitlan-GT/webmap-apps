@@ -44,5 +44,5 @@ function CloseCon($conn)
 Copyright © 2021 UAH.
 
 Model Data ETL for Lake Atitlan is distributed by UAH under the terms of the MIT License. See
-[LICENSE](https://github.com/Atitlan-GT/webmap_apps/blob/master/LICENSE) in this
+[LICENSE](https://github.com/Atitlan-GT/webmap-apps/blob/master/LICENSE) in this
 directory for more information.
