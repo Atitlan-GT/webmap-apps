@@ -1,6 +1,6 @@
 ﻿let map;
 let sss;
-let url = "https://ceodev.servirglobal.net:8888/";
+let url = "https://geegateway.servirglobal.net/"; //"https://ceodev.servirglobal.net:8888/";
 
 $(function () {
   map = new ol.Map({

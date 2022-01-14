@@ -106,7 +106,7 @@ function getAvailableData(service, start) {
     sensors: { l4: false, l5: false, l7: false, l8: true },
   };
   $.ajax({
-    url: "https://ceodev.servirglobal.net:8888/getImagePlotDegradition",
+      url: "https://geegateway.servirglobal.net/getImagePlotDegradition",
     type: "POST",
     async: true,
     crossDomain: true,
