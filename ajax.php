@@ -185,15 +185,15 @@ function listProbByRange()
 {
     $conn = OpenCon();
     $query = "SELECT `Date`,
-                            `prediction_prob`
-                       FROM `RF_prob_predict` WHERE `date` >= '" . $_POST['start'] . "' and `date` <= '" . $_POST['end'] . "'
+                            `prediction`
+                       FROM `RF_predict` WHERE `date` >= '" . $_POST['start'] . "' and `date` <= '" . $_POST['end'] . "'
                        ORDER BY `Date` ASC";
     $result = mysqli_query($conn, $query) or die(mysqli_error($query));
 
     $emparray = array();
     if ($result) {
         while ($row = mysqli_fetch_assoc($result)) {
-            $emparray[] = [$row['Date'], floatval($row['prediction_prob'])];
+            $emparray[] = [$row['Date'], floatval($row['prediction'])];
         }
         echo json_encode($emparray);
     } else {

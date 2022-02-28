@@ -62,9 +62,9 @@ $(function () {
         var pct = numpct + "%";
         $("#percent").text(pct);
 
-        if (numpct !== "N/A" && numpct > 0.5) {
+        if (numpct !== "N/A" && numpct > 50) {
           $("#yesnobloom").text("YES");
-        } else if (numpct !== "N/A" && numpct <= 0.5) {
+        } else if (numpct !== "N/A" && numpct <= 50) {
           $("#yesnobloom").text("NO");
         }
       }
