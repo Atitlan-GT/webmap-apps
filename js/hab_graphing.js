@@ -129,7 +129,7 @@ function chartData(data, container, text) {
           name: text,
           data: (() => {
             return data.map(function (point) {
-              return [Date.parse(point[0]), point[1]];
+              return [Date.parse(point[0]), point[1] === -1 ? 0 : point[1]];
             });
           })(),
         },
