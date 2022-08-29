@@ -359,7 +359,7 @@ function updateAvailableDates()
 function getDayAtAGlance()
 {
     $conn = OpenCon();
-    $query = "SELECT `LandMeanTemp`, `LakeMeanTemp`, `Rain`, `Date`
+    $query = "SELECT `LandMeanTemp`, `LakeMeanTemp`, `Rain`, `Date`, `DailyMeanWindDir`, `DailyMeanWindSpd`
                                        FROM hab_features
                                        ORDER BY `Date` DESC 
                                         LIMIT 1";
@@ -368,7 +368,7 @@ function getDayAtAGlance()
     $emparray = array();
     if ($result) {
         while ($row = mysqli_fetch_assoc($result)) {
-            $emparray[] = [$row['Date'], $row['LandMeanTemp'], $row['LakeMeanTemp'], $row['Rain']];
+            $emparray[] = [$row['Date'], $row['LandMeanTemp'], $row['LakeMeanTemp'], $row['Rain'], $row['DailyMeanWindDir'], $row['DailyMeanWindSpd']];
         }
         echo json_encode($emparray);
     } else {

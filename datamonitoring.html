@@ -159,7 +159,12 @@
       </div>
       <div
         class="col-sm-3"
-        style="height: 100%; padding: 0; background-color: #021d30"
+        style="
+          height: 100%;
+          padding: 0;
+          background-color: #021d30;
+          overflow-y: auto;
+        "
       >
         <h2 class="dashboardheader">Lake Atitlan Dashboard</h2>
         <div class="row">
@@ -199,6 +204,20 @@
               >
                 <p id="laketemp" class="calcval"></p>
                 <span id="ltdate"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-12">
+            <p class="dashboardheader">Wind</p>
+            <div class="row">
+              <div
+                class="col-sm-12 displaybox"
+                style="background-color: #395a79"
+              >
+                <p id="wind_speed_direction" class="calcval"></p>
+                <span id="wsdate"></span>
               </div>
             </div>
           </div>

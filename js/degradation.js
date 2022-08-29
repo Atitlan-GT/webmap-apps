@@ -30,11 +30,24 @@ $(function () {
             : (element[0][2] - 273.15).toFixed(2) + String.fromCharCode(176);
         $("#laketemp").text(lt);
 
+        var wind;
+
+        if (element[0][4] == null || element[0][5] == null) {
+          wind = "N/A";
+        } else {
+          wind =
+            Math.round(element[0][5] * 100) / 100 +
+            " m/s " +
+            calculate_direction(element[0][4]);
+        }
+        $("#wind_speed_direction").text(wind);
+
         var da = element[0][3] == null ? "N/A" : element[0][3] + '"';
         $("#dailyacc").text(da);
         $("#stdate").text(element[0][0]);
         $("#ltdate").text(element[0][0]);
         $("#dadate").text(element[0][0]);
+        $("#wsdate").text(element[0][0]);
       }
     });
 
@@ -72,3 +85,26 @@ $(function () {
 
   // get latest landsat and sentinel
 });
+
+function calculate_direction(value) {
+  var arr = [
+    "N",
+    "NNE",
+    "NE",
+    "ENE",
+    "E",
+    "ESE",
+    "SE",
+    "SSE",
+    "S",
+    "SSW",
+    "SW",
+    "WSW",
+    "W",
+    "WNW",
+    "NW",
+    "NNW",
+  ];
+
+  return arr[parseInt(value / 22.5 + 0.5) % 16];
+}
