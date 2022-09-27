@@ -34,7 +34,7 @@ $(function () {
     );
   } else {
     getImageCollection(
-      "LANDSAT/LC08/C01/T1_TOA",
+      "LANDSAT/LC08/C02/T1_TOA",
       ds30,
       dst,
       { bands: "B4,B3,B2", max: "0.3" },

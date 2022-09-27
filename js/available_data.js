@@ -341,7 +341,7 @@ function layerLoader(dateText, type, index) {
   } else {
     if (type === "Landsat") {
       getImageCollection(
-        "LANDSAT/LC08/C01/T1_TOA",
+        "LANDSAT/LC08/C02/T1_TOA",
         ds30,
         dst,
         {
