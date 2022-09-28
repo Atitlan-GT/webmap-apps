@@ -101,12 +101,10 @@ function getAvailableData(service, start) {
     ],
     start: start,
     end: todayString(),
-    band: service === "landsat" ? "NDFI" : "VV/VH",
-    dataType: service,
-    sensors: { l4: false, l5: false, l7: false, l8: true },
+    collection: service === "landsat" ? "LANDSAT/LC08/C02/T1_TOA" : "COPERNICUS/S1_GRD",
   };
   $.ajax({
-      url: "https://geegateway.servirglobal.net/getImagePlotDegradition",
+      url: "https://geegateway.servirglobal.net/getAvailableCollectionDates",
     type: "POST",
     async: true,
     crossDomain: true,
@@ -124,32 +122,14 @@ function getAvailableData(service, start) {
         // i can now get the dates out and add to the db
         // add dates to date picker then refresh
         let dbupdates = [];
-        data.timeseries.forEach(function (element) {
-          const date = new Date(element[0]);
+          data.available_dates.forEach(function (element) {
+          
           if (service === "landsat") {
-            available_landsat.push(
-              date.getUTCFullYear() +
-                "-" +
-                ("0" + (date.getUTCMonth() + 1)).slice(-2) +
-                "-" +
-                ("0" + date.getUTCDate()).slice(-2)
-            );
+            available_landsat.push(element);
           } else {
-            available_sentinel.push(
-              date.getUTCFullYear() +
-                "-" +
-                ("0" + (date.getUTCMonth() + 1)).slice(-2) +
-                "-" +
-                ("0" + date.getUTCDate()).slice(-2)
-            );
+            available_sentinel.push(element);
           }
-          dbupdates.push(
-            date.getUTCFullYear() +
-              "-" +
-              ("0" + (date.getUTCMonth() + 1)).slice(-2) +
-              "-" +
-              ("0" + date.getUTCDate()).slice(-2)
-          );
+          dbupdates.push(element);
         });
         refreshDatePickers(service);
         // send dbupdates to database to update
