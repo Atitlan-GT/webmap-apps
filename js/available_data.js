@@ -101,7 +101,7 @@ function getAvailableData(service, start) {
     ],
     start: start,
     end: todayString(),
-    collection: service === "landsat" ? "LANDSAT/LC08/C02/T1_TOA" : "COPERNICUS/S2",
+    imageCollection: service === "landsat" ? "LANDSAT/LC08/C02/T1_TOA" : "COPERNICUS/S2",
   };
   $.ajax({
       url: "https://geegateway.servirglobal.net/getAvailableCollectionDates",
